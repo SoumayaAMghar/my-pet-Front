@@ -6,19 +6,23 @@ import{Post} from './post';
   providedIn: 'root'
 })
 export class PostService {
-  private apiServiceUrl = 'http://localhost:7070';
-  constructor(private http: HttpClient) {}
+  private apiServerUrl = 'http://localhost:7070';
 
-  public getPosts(): Observable<Post[]>{
-    return this.http.get<any>(`${this.apiServiceUrl}/post/all`);
+  constructor(private http: HttpClient) { }
+
+  public getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.apiServerUrl}/post/all`);
   }
-  public addPost(post: Post): Observable<Post>{
-    return this.http.post<any>(`${this.apiServiceUrl}/post/add`, post);
+
+  public addPost(post: Post): Observable<Post> {
+    return this.http.post<Post>(`${this.apiServerUrl}/post/add`, post);
   }
-  public updatePost(post: Post): Observable<Post>{
-    return this.http.put<any>(`${this.apiServiceUrl}/post/update`, post);
+
+  public updatePost(post: Post): Observable<Post> {
+    return this.http.put<Post>(`${this.apiServerUrl}/post/update`, post);
   }
-  public deletePost(postId: number): Observable<void >{
-    return this.http.delete<void>(`${this.apiServiceUrl}/post/delete/${postId}`);
+
+  public deletePost(postId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/post/delete/${postId}`);
   }
 }
